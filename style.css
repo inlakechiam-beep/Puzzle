@@ -5,9 +5,9 @@ body, html {
     height: 100%;
     overflow: hidden;
     background-color: #1a1a1a;
+    font-family: sans-serif;
 }
 
-/* Der Viewport kümmert sich um den Zoom */
 #viewport {
     width: 100vw;
     height: 100vh;
@@ -21,9 +21,26 @@ body, html {
     width: 1772px;
     height: 1182px;
     position: relative;
-    background-color: #333;
+    background-color: #2a2a2a;
+    box-shadow: 0 0 20px rgba(0,0,0,0.5);
     transform-origin: center center;
-    transition: transform 0.1s ease-out;
+}
+
+/* Raster-Vorschau auf dem Feld */
+#grid-container {
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.grid-cell {
+    border: 1px dashed #444;
+    box-sizing: border-box;
 }
 
 .puzzle-piece {
@@ -32,7 +49,14 @@ body, html {
     position: absolute;
     cursor: grab;
     user-select: none;
-    background-image: url('rune.jpg'); /* Pfad zu deinem Bild */
-    transition: transform 0.2s ease;
+    background-image: url('rune.jpg');
     background-size: 1772px 1182px;
+    box-sizing: border-box;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+    touch-action: none;
+}
+
+.puzzle-piece:active {
+    cursor: grabbing;
+    z-index: 1000 !important;
 }
