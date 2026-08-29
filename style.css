@@ -26,7 +26,7 @@ body, html {
     transform-origin: center center;
 }
 
-/* Raster-Vorschau auf dem Feld */
+/* Raster-Vorschau & transparentes Hintergrundbild */
 #grid-container {
     width: 100%;
     height: 100%;
@@ -36,6 +36,18 @@ body, html {
     position: absolute;
     top: 0;
     left: 0;
+
+    /* Das Vorlage-Bild laden */
+    background-image: url('rune.jpg');
+    background-size: cover;
+    background-position: center;
+
+    /* Transparenz auf 10% stellen */
+    opacity: 0.02
+;
+
+    /* Verhindert, dass das Vorlagebild Maus-Events abfängt */
+    pointer-events: none;
 }
 
 .grid-cell {
