@@ -1,0 +1,38 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background-color: #1a1a1a;
+}
+
+/* Der Viewport kümmert sich um den Zoom */
+#viewport {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+#game-board {
+    width: 1772px;
+    height: 1182px;
+    position: relative;
+    background-color: #333;
+    transform-origin: center center;
+    transition: transform 0.1s ease-out;
+}
+
+.puzzle-piece {
+    width: 295.33px;
+    height: 295.5px;
+    position: absolute;
+    cursor: grab;
+    user-select: none;
+    background-image: url('rune.jpg'); /* Pfad zu deinem Bild */
+    transition: transform 0.2s ease;
+    background-size: 1772px 1182px;
+}
