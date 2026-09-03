@@ -1,3 +1,18 @@
+// PASSWORTSCHUTZ
+const GEHEIMES_PASSWORT = "t1m32f4ll"; // Dein gewünschtes Passwort
+
+let eingabe = prompt("Bitte gib das Passwort ein, um das Spiel zu starten:");
+
+if (eingabe !== GEHEIMES_PASSWORT) {
+  document.body.innerHTML = "<h1 style='color:white; text-align:center; padding-top:20%; font-family:sans-serif;'>Zugriff verweigert: Falsches Passwort!</h1>";
+  throw new Error("Falsches Passwort eingegeben.");
+}
+
+// Hier folgt dein restlicher Code (COLS, ROWS, etc.)
+const COLS = 6;
+const ROWS = 4;
+// ...
+
 const COLS = 6;
 const ROWS = 4;
 const WIDTH = 295.33;
