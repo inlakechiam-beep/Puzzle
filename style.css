@@ -1,73 +1,150 @@
 body, html {
-  margin: 0;
-  padding: 0;
-  width: 100vw;
-  height: 100vh;
-  overflow: hidden;
-  background-color: #1a1a1a;
-  font-family: sans-serif;
+    margin: 0;
+    padding: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    background-color: #1a1a1a;
+    font-family: sans-serif;
 }
 
 #viewport {
-  width: 100vw;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  overflow: hidden;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
 }
 
 /* Fixiertes Spielfeld mit festen Pixelmaßen */
 #game-board {
-  width: 1772px;
-  height: 1182px;
-  min-width: 1772px;
-  min-height: 1182px;
-  position: relative;
-  background-color: #2a2a2a;
-  box-shadow: 0 0 25px rgba(0,0,0,0.7);
-  transform-origin: center center;
-  box-sizing: border-box;
+    width: 1772px;
+    height: 1182px;
+    min-width: 1772px;
+    min-height: 1182px;
+    position: relative;
+    background-color: #2a2a2a;
+    box-shadow: 0 0 25px rgba(0,0,0,0.7);
+    transform-origin: center center;
+    box-sizing: border-box;
 }
 
 /* Grid mit fixer Bildgröße (kein 'cover' mehr!) */
 #grid-container {
-  width: 1772px;
-  height: 1182px;
-  display: grid;
-  grid-template-columns: repeat(6, 295.33px);
-  grid-template-rows: repeat(4, 295.5px);
-  position: absolute;
-  top: 0;
-  left: 0;
-  background-image: url('rune.jpg');
-  background-size: 1772px 1182px; /* Exakt fixe Bildgröße */
-  background-position: 0 0;
-  background-repeat: no-repeat;
-  opacity: 0.1;
-  pointer-events: none;
+    width: 1772px;
+    height: 1182px;
+    display: grid;
+    grid-template-columns: repeat(6, 295.33px);
+    grid-template-rows: repeat(4, 295.5px);
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-image: url('rune.jpg');
+    background-size: 1772px 1182px; /* Exakt fixe Bildgröße */
+    background-position: 0 0;
+    background-repeat: no-repeat;
+    opacity: 0.1;
+    pointer-events: none;
 }
 
 .grid-cell {
-  border: 1px dashed #555;
-  box-sizing: border-box;
-  width: 295.33px;
-  height: 295.5px;
+    border: 1px dashed #555;
+    box-sizing: border-box;
+    width: 295.33px;
+    height: 295.5px;
 }
 
 .puzzle-piece {
-  width: 295.33px;
-  height: 295.5px;
-  position: absolute;
-  cursor: grab;
-  user-select: none;
-  background-image: url('rune.jpg');
-  background-size: 1772px 1182px;
-  box-sizing: border-box;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.4);
-  touch-action: none;
+    width: 295.33px;
+    height: 295.5px;
+    position: absolute;
+    cursor: grab;
+    user-select: none;
+    background-image: url('rune.jpg');
+    background-size: 1772px 1182px;
+    box-sizing: border-box;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.4);
+    touch-action: none;
 }
 
 .puzzle-piece:active {
-  cursor: grabbing;
+    cursor: grabbing;
+}
+
+/* --- EINSTELLUNGEN FÜR DEN KREIS --- */
+:root {
+    --circle-size: 1760px;         /* <-- DIESEN WERT ÄNDERN (z. B. auf 1600px oder 1200px) */
+    --circle-border-width: 32px;   /* Hier änderst du die Linienstärke */
+    --circle-color: #30bb20;       /* Hier änderst du die Farbe */
+    --circle-offset-y: 0px;        /* Hier verschiebst du den Kreis nach oben/unten */
+    --circle-offset-x: 0px;        /* Hier verschiebst du den Kreis nach links/rechts */
+}
+
+#game-board {
+    width: 1772px;
+    height: 1182px;
+    min-width: 1772px;
+    min-height: 1182px;
+    position: relative;
+    transform-origin: center center;
+    box-sizing: border-box;
+}
+
+/* 1. Kreis (z-index 1) */
+#bg-circle {
+    position: absolute;
+    top: calc(50% + var(--circle-offset-y));
+    left: calc(50% + var(--circle-offset-x));
+    width: var(--circle-size);
+    height: var(--circle-size);
+    border: var(--circle-border-width) solid var(--circle-color);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    box-sizing: border-box;
+    z-index: 1;
+    pointer-events: none;
+}
+
+/* 2. Blickdichter schwarzer Kasten (z-index 2) -> Blockiert den Kreis komplett */
+#board-solid-bg {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: #1a1a1a;
+    z-index: 2;
+    box-shadow: 0 0 25px rgba(0,0,0,0.7);
+}
+
+/* 3. Grid-Container mit 10% Transparenz */
+#grid-container {
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-template-columns: repeat(6, 295.33px);
+    grid-template-rows: repeat(4, 295.5px);
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-image: url('rune.jpg');
+    background-size: 1772px 1182px;
+    background-position: 0 0;
+    background-repeat: no-repeat;
+    opacity: 0.1; /* Hier sind die 10% Sichtbarkeit */
+    pointer-events: none;
+}
+
+.grid-cell {
+    border: 1px dashed #555;
+    box-sizing: border-box;
+}
+
+/* 4. Puzzle-Teile oben drüber (z-index 3) */
+#pieces-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 3;
 }
