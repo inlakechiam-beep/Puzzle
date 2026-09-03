@@ -1,74 +1,73 @@
 body, html {
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-    background-color: #1a1a1a;
-    font-family: sans-serif;
+  margin: 0;
+  padding: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background-color: #1a1a1a;
+  font-family: sans-serif;
 }
 
 #viewport {
-    width: 100vw;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
 }
 
+/* Fixiertes Spielfeld mit festen Pixelmaßen */
 #game-board {
-    width: 1772px;
-    height: 1182px;
-    position: relative;
-    background-color: #2a2a2a;
-    box-shadow: 0 0 20px rgba(0,0,0,0.5);
-    transform-origin: center center;
+  width: 1772px;
+  height: 1182px;
+  min-width: 1772px;
+  min-height: 1182px;
+  position: relative;
+  background-color: #2a2a2a;
+  box-shadow: 0 0 25px rgba(0,0,0,0.7);
+  transform-origin: center center;
+  box-sizing: border-box;
 }
 
-/* Raster-Vorschau & transparentes Hintergrundbild */
+/* Grid mit fixer Bildgröße (kein 'cover' mehr!) */
 #grid-container {
-    width: 100%;
-    height: 100%;
-    display: grid;
-    grid-template-columns: repeat(6, 1fr);
-    grid-template-rows: repeat(4, 1fr);
-    position: absolute;
-    top: 0;
-    left: 0;
-
-    /* Das Vorlage-Bild laden */
-    background-image: url('rune.jpg');
-    background-size: cover;
-    background-position: center;
-
-    /* Transparenz auf 10% stellen */
-    opacity: 0.02
-;
-
-    /* Verhindert, dass das Vorlagebild Maus-Events abfängt */
-    pointer-events: none;
+  width: 1772px;
+  height: 1182px;
+  display: grid;
+  grid-template-columns: repeat(6, 295.33px);
+  grid-template-rows: repeat(4, 295.5px);
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-image: url('rune.jpg');
+  background-size: 1772px 1182px; /* Exakt fixe Bildgröße */
+  background-position: 0 0;
+  background-repeat: no-repeat;
+  opacity: 0.1;
+  pointer-events: none;
 }
 
 .grid-cell {
-    border: 1px dashed #444;
-    box-sizing: border-box;
+  border: 1px dashed #555;
+  box-sizing: border-box;
+  width: 295.33px;
+  height: 295.5px;
 }
 
 .puzzle-piece {
-    width: 295.33px;
-    height: 295.5px;
-    position: absolute;
-    cursor: grab;
-    user-select: none;
-    background-image: url('rune.jpg');
-    background-size: 1772px 1182px;
-    box-sizing: border-box;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
-    touch-action: none;
+  width: 295.33px;
+  height: 295.5px;
+  position: absolute;
+  cursor: grab;
+  user-select: none;
+  background-image: url('rune.jpg');
+  background-size: 1772px 1182px;
+  box-sizing: border-box;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.4);
+  touch-action: none;
 }
 
 .puzzle-piece:active {
-    cursor: grabbing;
-    z-index: 1000 !important;
+  cursor: grabbing;
 }
